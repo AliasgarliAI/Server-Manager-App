@@ -32,12 +32,12 @@ public class ServerController {
         return new ResponseEntity<>(body, statusOk);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<Response> getServersByPage(@RequestParam Integer page, @RequestParam Integer size) {
         return new ResponseEntity<>(responseBuilder(serverService.getServersByPage(page, size), statusOk), statusOk);
     }
 
-    @GetMapping()
+    @GetMapping("/name")
     public ResponseEntity<Response> getSeversByName(@RequestParam String name) {
         return new ResponseEntity<>(responseBuilder(serverService.getServerByName(name), statusOk), statusOk);
     }
@@ -66,7 +66,7 @@ public class ServerController {
         return new ResponseEntity<>(responseBuilder(null,statusOk),statusOk);
     }
 
-    @PostMapping
+    @PostMapping("/ping")
     public ResponseEntity<Response> pingServer(@RequestBody String serverIp) throws IOException {
         Response body = responseBuilder(List.of(serverService.ping(serverIp)), statusOk);
         return new ResponseEntity<>(body,statusOk);

@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  servermanager_db:
+  mysqldb:
     container_name: servermanager_db
     image: mysql
     ports:
@@ -10,7 +10,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=pass
       - MYSQL_DATABASE=servermanagerapp
-      - MYSQL_USER=admin
+      - MYSQL_USER=user
       - MYSQL_PASSWORD=123456789
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD}"]
@@ -25,7 +25,7 @@ services:
     networks:
       - spring-boot-mysql-network
     depends_on:
-      servermanager_db:
+      mysqldb:
         condition: service_healthy
 networks:
   spring-boot-mysql-network:
